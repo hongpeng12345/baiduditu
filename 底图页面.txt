@@ -1,0 +1,59 @@
+*** Settings ***
+Library           AppiumLibrary
+
+*** Test Cases ***
+进入百度地图界面页
+    Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=9.0.0    deviceName=ef1e_for_arm64    appPackage=ecarx.launcher3    appActivity=.AppPane    noReset=true
+    sleep    2
+    click element    xpath=(//android.widget.TextView[@content-desc="百度地图卓越版"])[1]
+    sleep    1
+    ${id}    get text    id=com.ecarx.adnavi:id/tv_where_to_go
+    should contain    ${id}    想去哪？
+
+底图放大
+    comment    点击加号放大地图
+    click element    xpath=//android.widget.ImageView[@content-desc="放大"]
+    sleep    3
+    comment    点击加号再放大地图
+    click element    xpath=//android.widget.ImageView[@content-desc="放大"]
+    sleep    3
+    comment    点击加号再次放大地图
+    click element    xpath=//android.widget.ImageView[@content-desc="放大"]
+    sleep    3
+    comment    点击加号放第四次大地图
+    click element    xpath=//android.widget.ImageView[@content-desc="放大"]
+    sleep    3
+
+底图缩小
+    comment    点击减号放大地图
+    click element    xpath=//android.widget.ImageView[@content-desc="缩小"]
+    sleep    3
+    comment    点击减号再放大地图
+    click element    xpath=//android.widget.ImageView[@content-desc="缩小"]
+    sleep    3
+    comment    点击减号再次放大地图
+    click element    xpath=//android.widget.ImageView[@content-desc="缩小"]
+    sleep    3
+    comment    点击减号放第四次大地图
+    click element    xpath=//android.widget.ImageView[@content-desc="缩小"]
+    sleep    3
+
+底图移动
+    comment    滑动底图
+    Swipe    645    200    645    600    5000
+    log    滑动成功
+    sleep    3
+    comment    左滑之后又滑还原
+    Swipe    200    650    3000    650    5000
+    sleep    3
+
+返回车位
+    comment    返回自己车位
+    click element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[4]/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout
+    sleep    3
+
+双击放大
+    [Documentation]    1.双击屏幕任一点放大
+    Click Button    545    600
+
+两指缩小
